@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party
+    'crispy_forms', 
     
     # Local
     'accounts', 
     'pages', 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -131,6 +136,31 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# STATICFILES_DIRS which defines the location of static files in local development.
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+
+# STATIC_ROOT is the location of static files for production 
+# so it must be set to a different name, typically staticfiles.
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+# The last setting is STATICFILES_FINDERS, which tells Django 
+# how to look for static file directories. (Optional)
+
+'''
+The FileSystemFinder looks within the STATICFILES_DIRS setting, 
+which we set to static, for any static files. Then the AppDirectoriesFinder 
+looks for any directories named static located within an app, as opposed to 
+located at a project-level static directory. This setting is read top-to-bottom 
+meaning if a file called static/img.png is first found by FileSystemFinder 
+it will be in place of an img.png file located within, say, the pages app 
+at pages/static/img.png.
+'''
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder", 
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder", 
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
