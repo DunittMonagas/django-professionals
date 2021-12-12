@@ -199,6 +199,12 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder", 
 ]
 
+# absolute file system path to the directory for user-uploaded files
+MEDIA_URL = '/media/'
+
+# URL we can use in our templates for the files
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
