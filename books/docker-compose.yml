@@ -5,7 +5,7 @@ version: '3.8'
 services:
     web:
         build: .
-        command: python /django-professionals/manage.py runserver 0.0.0.0:8000
+        command: gunicorn config.wsgi -b 0.0.0.0:8000
         volumes:
             - .:/django-professionals
         ports:
